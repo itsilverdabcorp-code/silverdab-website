@@ -28,7 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {children}
         <Script
           defer
-          src="http://10.10.100.112:3001/script.js"
+          src="https://analytics.silvergraph.ai/script.js"
           data-website-id="13ff8a57-af8f-4aad-ab9d-9db0398b9cc3"
           strategy="afterInteractive"
         />
