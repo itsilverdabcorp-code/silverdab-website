@@ -262,6 +262,9 @@ export default function ProjectGlobe({ onSelect, activeCode = null }: Props) {
   return (
     <div ref={wrapperRef} className="relative mx-auto w-full max-w-250">
       <style>{`
+        @keyframes gl-ring-spin { to { stroke-dashoffset: -12; } }
+        .gl-ring { animation: gl-ring-spin 0.9s linear infinite; }
+        @media (prefers-reduced-motion: reduce) { .gl-ring { animation: none; } }
         @keyframes gl-land-in { from { opacity: 0; } to { opacity: 1; } }
         .gl-active-land { animation: gl-land-in 0.3s ease; pointer-events: none; }
         .gl-pin { cursor: pointer; outline: none; }
@@ -386,6 +389,7 @@ export default function ProjectGlobe({ onSelect, activeCode = null }: Props) {
                 >
                   {/* Dashed ring on the biggest location */}
                   <ellipse
+                    className="gl-ring"
                     cx={0}
                     cy={0}
                     rx={16 * s}

@@ -100,7 +100,7 @@ export default function KitemarkSection() {
               rel="noopener noreferrer"
               aria-hidden={stage < 3}
               tabIndex={stage >= 3 ? 0 : -1}
-              className={`mt-3 rounded-full border border-sky-500 px-3.5 py-1 text-xs font-medium text-sky-600 transition-all duration-700 hover:bg-sky-500 hover:text-white ${
+              className={`mt-3 rounded-full px-3.5 py-1 text-xs font-medium text-sky-600 transition-all duration-700 hover:bg-sky-500 hover:text-white ${
                 stage >= 3
                   ? "translate-y-0 opacity-100"
                   : "pointer-events-none translate-y-3 opacity-0"
