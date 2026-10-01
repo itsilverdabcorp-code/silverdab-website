@@ -48,11 +48,6 @@ export default function KitemarkSection() {
               DELAY_TO_SLIDE_MS + DELAY_TO_BUTTON_MS
             )
           );
-        } else if (entry.intersectionRatio === 0) {
-          // Fully out of view: reset so the animation replays next time
-          started.current = false;
-          clearTimers();
-          setStage(0);
         }
       },
       { threshold: [0, 0.4] }

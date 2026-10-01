@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ExpertiseCarousel from "./components/expertise/ExpertiseCarousel";
+import ClientLogos from "./components/clients/ClientLogos";
 
 export default function Home() {
   return (
@@ -69,13 +70,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full bg-white py-35">
+      <section className="w-full bg-white py-20">
         <div className="mx-auto w-full max-w-7xl px-10 text-center">
           <h2 className="text-4xl font-medium text-black sm:text-5xl">
             About Silverdab
           </h2>
 
-          <div className="mt-10 w-full space-y-8 text-sm leading-relaxed text-zinc-800 sm:text-base">
+          <div className="mt-10 w-full space-y-8 text-base leading-relaxed text-zinc-800 sm:text-xl">
             <p>
               <span className="text-sky-600">Silverdab Corporation</span> is a
               technology-driven BIM and Digital Engineering company focused on
@@ -111,6 +112,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <ClientLogos />
 
       <ExpertiseCarousel />
 

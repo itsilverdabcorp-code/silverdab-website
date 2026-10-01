@@ -336,8 +336,11 @@ export default function ExpertiseCarousel() {
   }, [index, paused, total]);
 
   return (
-    <section className="w-full bg-[#F5F6F7] py-20">
-      <div className="mx-auto w-full max-w-7xl px-10">
+    <section className="w-full overflow-hidden bg-[#F5F6F7] py-20">
+      <div
+        className="mx-auto w-full max-w-7xl px-10"
+        style={{ containerType: "inline-size" }}
+      >
         <div className="flex items-end justify-between">
           <div>
             <h2 className="text-4xl font-medium text-black sm:text-5xl">
@@ -358,18 +361,22 @@ export default function ExpertiseCarousel() {
 
         {/* Carousel viewport */}
         <div
-          className="mt-8 overflow-hidden"
+          className="mt-8"
+          style={{
+            marginInline: "calc(50% - 50vw)",
+            paddingLeft: "calc(50vw - 50cqw)",
+          }}
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
           <div
             className="flex gap-6 transition-transform duration-700 ease-in-out"
             style={{
-              transform: `translateX(calc(-${index} * (80% + 1.5rem)))`,
+              transform: `translateX(calc(${index} * -1 * (80cqw + 1.5rem)))`,
             }}
           >
             {EXPERTISE.map((card) => (
-              <div key={card.title} className="w-[80%] shrink-0">
+              <div key={card.title} className="w-[80cqw] shrink-0">
                 <article className="grid h-full min-h-[460px] grid-cols-1 overflow-hidden rounded-2xl bg-white md:grid-cols-[1fr_auto]">
                   <div className="flex flex-col justify-start p-12">
                     <h3 className="text-4xl font-medium text-black sm:text-5xl">

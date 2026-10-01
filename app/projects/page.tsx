@@ -2,9 +2,13 @@
 "use client";
 
 import { useState } from "react";
+import ProjectsIntro from "../components/projects/ProjectsIntro";
 import ProjectGlobe from "../components/projects/ProjectGlobe";
-import ProjectDetailsCard from "../components/projects/ProjectDetailsCard";
+
+
 import type { Project } from "../data/projects";
+import ProjectDetailsCard from "../components/projects/ProjectDetailsCard";
+import ProjectsShowcase from "../components/projects/ProjectsShowcase";
 
 export default function ProjectsPage() {
   const [selected, setSelected] = useState<Project | null>(null);
@@ -16,27 +20,29 @@ export default function ProjectsPage() {
   };
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-[#060b18] px-6 py-16">
-      <div className="mx-auto max-w-5xl text-center text-white">
-        <h1 className="text-3xl font-semibold sm:text-4xl">
-          Our Projects Around the World
-        </h1>
-        <p className="mt-3 text-zinc-400">
-          Drag to rotate the globe. Click a marker to see project details.
-        </p>
-      </div>
+    <>
+      <ProjectsIntro />
 
-      <div className="relative mt-10">
-        <ProjectGlobe onSelect={handleSelect} />
+      <div className="relative w-full overflow-hidden bg-white px-6 pb-20">
 
-        {selected && cardPos && (
-          <ProjectDetailsCard
-            project={selected}
-            position={cardPos}
-            onClose={() => setSelected(null)}
+        <div className="relative mt-10">
+          <ProjectGlobe
+            onSelect={handleSelect}
+            activeCode={selected?.countryCode ?? null}
           />
-        )}
+
+          {selected && cardPos && (
+            <ProjectDetailsCard
+              key={selected.countryCode}
+              project={selected}
+              position={cardPos}
+              onClose={() => setSelected(null)}
+            />
+          )}
+        </div>
       </div>
-    </div>
+
+      <ProjectsShowcase />
+    </>
   );
 }
