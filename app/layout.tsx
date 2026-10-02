@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import Script from "next/script";
 import Navbar from "./components/navbar/Navbar";
 import "./globals.css";
+import Footer from "./components/footer/Footer";
 
 const neueMontreal = localFont({
   src: [
@@ -60,6 +61,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <Navbar />
         {children}
+        <Footer />
         <Script
           defer
           src="https://analytics.silvergraph.ai/script.js"

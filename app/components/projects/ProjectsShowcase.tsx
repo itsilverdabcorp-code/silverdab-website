@@ -127,7 +127,28 @@ export default function ProjectsShowcase() {
   const [filter, setFilter] = useState<Filter>("All");
   const trackRef = useRef<HTMLDivElement>(null);
 
-  const items = filter === "All" ? PROJECT_LIST : PROJECT_LIST.filter((p) => p.category === filter);
+  // Which projects actually have a video or image file (checked once on mount)
+  const [hasMedia, setHasMedia] = useState<Record<string, boolean>>({});
+
+  useEffect(() => {
+    let cancelled = false;
+    PROJECT_LIST.forEach((p) => {
+      findMedia(p.video).then((m) => {
+        if (!cancelled) setHasMedia((prev) => ({ ...prev, [p.name]: !!m }));
+      });
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // Only show a project if it has a description AND a video/image
+  const items = PROJECT_LIST.filter(
+    (p) =>
+      (filter === "All" || p.category === filter) &&
+      !!p.description?.trim() &&
+      hasMedia[p.name]
+  );
 
   useEffect(() => {
     trackRef.current?.scrollTo({ left: 0 });

@@ -89,6 +89,7 @@ export const PROJECT_LIST: ListItem[] = [
     description:
       "The Blue Line represents a massive Dh56 billion investment in the emirate's transport infrastructure. It will stretch 30 kilometres, split between 15.5 kilometres of underground track and 14.5 kilometres above ground. It will include 14 stations, with critical interchange connections to both the Red and Green Lines.",
     video: "/projects/dubai-metro-blue-line/video.mp4",
+    logos: [AEDAS],
   },
   {
     countryCode: "VN",

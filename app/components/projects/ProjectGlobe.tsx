@@ -27,6 +27,8 @@ const INITIAL_ROTATION: Rotation = [-80, -8]; // [-longitude, -latitude] of the 
 const GLOBE_SIZE = 0.92; // globe diameter as a share of the width
 const DRAG_SPEED = 90; // higher = rotates faster while dragging
 const FRICTION_MS = 325; // higher = glides longer after letting go, lower = stops sooner
+const AUTO_SPEED = 0.01; // auto-rotation speed in degrees per millisecond (0.01 = 10° per second)
+const AUTO_RESUME_MS = 5000; // how long to wait after dragging before auto-rotation resumes
 
 const COLORS = {
   land: "#c9c9c9",
@@ -100,6 +102,7 @@ export default function ProjectGlobe({ onSelect, activeCode = null }: Props) {
   const lastMoveRef = useRef({ r0: 0, r1: 0, t: 0 });
   const velRef = useRef({ x: 0, y: 0 }); // degrees per millisecond
   const inertiaRef = useRef<number | null>(null);
+  const lastInteractionRef = useRef(-Infinity); // when the user last touched the globe
 
   useEffect(() => {
     const el = wrapperRef.current;
@@ -124,6 +127,31 @@ export default function ProjectGlobe({ onSelect, activeCode = null }: Props) {
     return () => {
       if (inertiaRef.current !== null) cancelAnimationFrame(inertiaRef.current);
     };
+  }, []);
+
+  // Automatic rotation (right to left). Pauses while dragging or gliding,
+  // and resumes AUTO_RESUME_MS after the last interaction.
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return undefined;
+    }
+    let raf = 0;
+    let prev = performance.now();
+    const tick = (now: number) => {
+      const dt = Math.min(now - prev, 50);
+      prev = now;
+      const idle =
+        dragRef.current === null &&
+        inertiaRef.current === null &&
+        now - lastInteractionRef.current >= AUTO_RESUME_MS;
+      if (idle) {
+        const [a, b] = rotationRef.current;
+        setRotation([a - AUTO_SPEED * dt, b]);
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
   }, []);
 
   // Everything that depends on the current rotation
@@ -194,6 +222,7 @@ export default function ProjectGlobe({ onSelect, activeCode = null }: Props) {
     };
     const onUp = () => {
       dragRef.current = null;
+      lastInteractionRef.current = performance.now();
       setDragging(false);
 
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -222,6 +251,7 @@ export default function ProjectGlobe({ onSelect, activeCode = null }: Props) {
           inertiaRef.current = requestAnimationFrame(step);
         } else {
           inertiaRef.current = null;
+          lastInteractionRef.current = performance.now();
         }
       };
       inertiaRef.current = requestAnimationFrame(step);
@@ -244,6 +274,7 @@ export default function ProjectGlobe({ onSelect, activeCode = null }: Props) {
       inertiaRef.current = null;
     }
     velRef.current = { x: 0, y: 0 };
+    lastInteractionRef.current = performance.now();
     lastMoveRef.current = {
       r0: rotationRef.current[0],
       r1: rotationRef.current[1],

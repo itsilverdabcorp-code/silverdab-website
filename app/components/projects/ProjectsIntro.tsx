@@ -16,7 +16,7 @@ function Stat({ value, label }: { value: string; label: ReactNode }) {
   return (
     <div className="text-center">
       <p
-        className="pi-shine mx-auto w-fit bg-clip-text text-7xl font-normal leading-none text-transparent sm:text-8xl"
+        className="pi-shine mx-auto w-fit bg-clip-text text-7xl font-medium leading-none text-transparent sm:text-8xl"
         style={vars({
           "--pi-fade": `${T.statFade}ms`,
           "--pi-shine": `${T.statShine}ms`,

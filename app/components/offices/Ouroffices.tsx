@@ -69,7 +69,7 @@ const OFFICES: Office[] = [
     lon: 139.7,
     lat: 35.7,
     dx: 30,
-    dy: -26,
+    dy: -48,
     heading: ["Branch Office", "Shibuya Tokyo"],
     soon: true,
   },
@@ -95,14 +95,20 @@ const allCountries = (
 
 const projection = geoOrthographic()
   .rotate([-108.96, 6.85])
-  .scale(352.36)
-  .translate([639.85, 363.04])
+  .scale(299.5)
+  .translate([648.9, 359.6])
   .clipAngle(90)
   .precision(0.5);
 const path = geoPath(projection);
 
 const LIGHT_NAMES = new Set(["Philippines", "Japan", "Australia"]);
-const darkD = path({ type: "FeatureCollection", features: allCountries }) ?? "";
+const darkD =
+  path({
+    type: "FeatureCollection",
+    features: allCountries.filter(
+      (c) => (c.properties as { name?: string } | null)?.name !== "Antarctica"
+    ),
+  }) ?? "";
 const lightD =
   path({
     type: "FeatureCollection",
@@ -256,7 +262,7 @@ function MapSvg({ viewBox, className }: { viewBox: string; className?: string })
         {/* soft fade on the left and top, where the map is cropped */}
         <mask id={maskId} maskUnits="userSpaceOnUse" x="0" y="0" width={DESIGN_W} height={DESIGN_H}>
           <rect x="0" y="0" width={DESIGN_W} height={DESIGN_H} fill="black" />
-          <rect x="420" y="105" width="700" height="600" fill="white" filter={`url(#${blurId})`} />
+          <rect x="420" y="-300" width="700" height="1200" fill="white" filter={`url(#${blurId})`} />
         </mask>
       </defs>
 
@@ -385,7 +391,7 @@ export default function OurOffices() {
           Our Offices
         </h2>
 
-        <MapSvg viewBox="400 70 649 560" className="mt-4 h-auto w-full" />
+        <MapSvg viewBox="400 50 649 570" className="mt-4 h-auto w-full" />
 
         <div className="mt-6 grid gap-6 sm:grid-cols-2">
           {pins.map((o, i) => (
