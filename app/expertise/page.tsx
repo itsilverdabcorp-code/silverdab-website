@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import ExpertiseIntro from "../components/expertise/ExpertiseIntro";
 import ServicesCarousel from "../components/services/ServicesCarousel";
 import ExpertiseTabs from "../components/expertise/ExpertiseTabs";
+
+export const metadata: Metadata = {
+  title: "Expertise | Silverdab",
+  description:
+    "Explore Silverdab's expertise and services, from BIM to digital engineering.",
+};
 
 export default function ExpertisePage() {
   return (

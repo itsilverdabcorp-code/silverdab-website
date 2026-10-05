@@ -10,6 +10,10 @@ import type { Project } from "../data/projects";
 import ProjectDetailsCard from "../components/projects/ProjectDetailsCard";
 import ProjectsShowcase from "../components/projects/ProjectsShowcase";
 
+
+
+
+
 export default function ProjectsPage() {
   const [selected, setSelected] = useState<Project | null>(null);
   const [cardPos, setCardPos] = useState<{ x: number; y: number } | null>(null);
