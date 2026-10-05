@@ -59,17 +59,17 @@ export default function ContactForm() {
       <div className="grid gap-4 sm:grid-cols-2">
         <Reveal delay={0.3}>
           <label htmlFor="firstName" className={labelCls}>First Name</label>
-          <input id="firstName" name="firstName" required placeholder="First" className={inputCls} />
+          <input id="firstName" name="firstName" required placeholder="First Name" className={inputCls} />
         </Reveal>
         <Reveal delay={0.4}>
           <label htmlFor="lastName" className={labelCls}>Last Name</label>
-          <input id="lastName" name="lastName" required placeholder="Last" className={inputCls} />
+          <input id="lastName" name="lastName" required placeholder="Last Name" className={inputCls} />
         </Reveal>
       </div>
 
       <Reveal delay={0.5} className="mt-4">
         <label htmlFor="email" className={labelCls}>Email</label>
-        <input id="email" name="email" type="email" required placeholder="@gmail.com" className={inputCls} />
+        <input id="email" name="email" type="email" required placeholder="Email Address" className={inputCls} />
       </Reveal>
 
       <Reveal delay={0.6} className="relative z-30 mt-4">
