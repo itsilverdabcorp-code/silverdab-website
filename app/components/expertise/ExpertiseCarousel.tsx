@@ -351,7 +351,7 @@ export default function ExpertiseCarousel() {
   }, [index, paused, inView, total]);
 
   return (
-    <section id="services" className="w-full overflow-hidden bg-white py-20">View, total]);
+    <section id="services" className="w-full overflow-hidden bg-[#F2F2F2] py-20">
       <div
         className="mx-auto w-full max-w-7xl px-10"
         style={{ containerType: "inline-size" }}
