@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Reveal from "../Reveal";
 
 export default function ExpertiseIntro() {
   return (
@@ -6,16 +7,21 @@ export default function ExpertiseIntro() {
       {/* Precision at Every Stage */}
       <section className="w-full bg-white py-50">
         <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-6 px-6 text-center">
-          <h2 className="text-5xl font-bold text-black sm:text-6xl">
-            Precision at Every Stage
-          </h2>
+          <Reveal>
+            <h2 className="text-5xl font-bold text-black sm:text-6xl">
+              Precision at Every Stage
+            </h2>
+          </Reveal>
 
-          <p className="text-xl leading-snug text-zinc-800 sm:text-3xl">
-            From early design to long-term asset performance, our expertise
-            brings clarity, coordination, and confidence to every stage of your
-            project.
-          </p>
+          <Reveal delay={0.2}>
+            <p className="text-xl leading-snug text-zinc-900 sm:text-2xl">
+              From early design to long-term asset performance, our expertise
+              brings clarity, coordination, and confidence to every stage of
+              your project.
+            </p>
+          </Reveal>
 
+          <Reveal delay={0.4}>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Link
               href="#expertise"
@@ -24,12 +30,13 @@ export default function ExpertiseIntro() {
               See Our Expertise
             </Link>
             <Link
-              href="/services"
+              href="#services"
               className="rounded-full bg-[#35A2CA] px-8 py-3 text-lg font-normal text-white transition-colors hover:bg-[#2b8aae]"
             >
               See Our Services
             </Link>
           </div>
+          </Reveal>
         </div>
       </section>
 
@@ -47,12 +54,15 @@ export default function ExpertiseIntro() {
 
         <div className="absolute inset-0 bg-black/40" />
 
-        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center gap-6 px-10 py-20 text-center text-white">
-          <h2 className="text-5xl font-medium sm:text-6xl">
-            Digital Engineering
-          </h2>
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center gap-6 px-10 py-32 text-center text-white">
+          <Reveal>
+            <h2 className="text-4xl font-medium sm:text-5xl">
+              Digital Engineering
+            </h2>
+          </Reveal>
 
-          <div className="mt-4 space-y-8 text-lg leading-relaxed sm:text-2xl">
+          <Reveal delay={0.2}>
+          <div className="mt-4 space-y-8 text-base leading-relaxed sm:text-xl">
             <p>
               The demand for digitizing the design and construction process has
               significantly increased. The industry recognizes its importance.
@@ -75,6 +85,7 @@ export default function ExpertiseIntro() {
 
             <p>- Silverdab Corporation President / BIM Director</p>
           </div>
+          </Reveal>
         </div>
       </section>
     </>

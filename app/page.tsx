@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ExpertiseCarousel from "./components/expertise/ExpertiseCarousel";
 import ClientLogos from "./components/clients/ClientLogos";
+import Reveal from "./components/Reveal";
 
 export default function Home() {
   return (
@@ -19,13 +20,21 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/40" />
 
         <div className="relative z-10 flex flex-col items-center gap-6 px-6 py-24 text-center text-white">
-          <p className="text-5xl font-normal">Welcome to Silverdab!</p>
+          <p className="hero-slide-in text-5xl font-normal">
+            Welcome to Silverdab!
+          </p>
 
-          <h1 className="max-w-6xl whitespace-nowrap text-5xl font-medium leading-tight sm:text-6xl lg:text-7xl">
+          <h1
+            className="hero-slide-in max-w-6xl whitespace-nowrap text-5xl font-medium leading-tight sm:text-6xl lg:text-7xl"
+            style={{ animationDelay: "0.3s" }}
+          >
             Building Smarter, For a Better World
           </h1>
 
-          <div className="flex flex-wrap items-center justify-center gap-4">
+          <div
+            className="hero-slide-up flex flex-wrap items-center justify-center gap-4"
+            style={{ animationDelay: "0.8s" }}
+          >
             <Link
               href="/contact"
               className="rounded-full bg-sky-400 px-6 py-2.5 text-xl font-normal text-white transition-colors hover:bg-sky-500"
@@ -42,7 +51,10 @@ export default function Home() {
           </div>
 
           <div className="mt-10 flex flex-wrap items-start justify-center gap-x-20 gap-y-6">
-            <div className="text-left">
+            <div
+              className="hero-slide-up text-left"
+              style={{ animationDelay: "1.2s" }}
+            >
               <p className="text-5xl font-medium sm:text-7xl">26+</p>
               <p className="mt-1 text-2xl text-zinc-200">
                 Projects
@@ -50,7 +62,10 @@ export default function Home() {
                 Delivered
               </p>
             </div>
-            <div className="text-left">
+            <div
+              className="hero-slide-up text-left"
+              style={{ animationDelay: "1.5s" }}
+            >
               <p className="text-5xl font-medium sm:text-7xl">13+</p>
               <p className="mt-1 text-2xl text-zinc-200">
                 Countries
@@ -58,7 +73,10 @@ export default function Home() {
                 Served
               </p>
             </div>
-            <div className="text-left">
+            <div
+              className="hero-slide-up text-left"
+              style={{ animationDelay: "1.8s" }}
+            >
               <p className="text-5xl font-medium sm:text-7xl">1st</p>
               <p className="mt-1 text-2xl text-zinc-200">
                 ISO 19650 Certified
@@ -72,10 +90,13 @@ export default function Home() {
 
       <section className="w-full bg-white py-20">
         <div className="mx-auto w-full max-w-7xl px-10 text-center">
-          <h2 className="text-4xl font-medium text-black sm:text-5xl">
-            About Silverdab
-          </h2>
+          <Reveal>
+            <h2 className="text-4xl font-medium text-black sm:text-5xl">
+              About Silverdab
+            </h2>
+          </Reveal>
 
+          <Reveal delay={0.2}>
           <div className="mt-10 w-full space-y-8 text-base leading-relaxed text-zinc-800 sm:text-xl">
             <p>
               <span className="text-sky-600">Silverdab Corporation</span> is a
@@ -110,6 +131,7 @@ export default function Home() {
               solutions.
             </p>
           </div>
+          </Reveal>
         </div>
       </section>
 
@@ -119,12 +141,15 @@ export default function Home() {
 
       <section className="w-full bg-white py-20">
         <div className="mx-auto w-full max-w-7xl px-10">
+          <Reveal autoPlayVideo>
           <video
             className="aspect-video w-full rounded-2xl object-cover"
             src="/videos/hero-edit.mp4"
             controls
+            muted
             playsInline
           />
+          </Reveal>
         </div>
       </section>
     </div>

@@ -3,9 +3,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Reveal from "../Reveal";
 
-type IconName =
+export type IconName =
   | "box"
   | "ruler"
   | "crane"
@@ -104,7 +105,7 @@ const EXPERTISE: ExpertiseCard[] = [
 const AUTO_ADVANCE_MS = 5000;
 
 // Inline SVG path data per icon (24x24 grid, Lucide style).
-const ICON_PATHS: Record<IconName, React.ReactNode> = {
+export const ICON_PATHS: Record<IconName, React.ReactNode> = {
   // 2D to 3D Conversion: cube
   box: (
     <>
@@ -322,6 +323,20 @@ function ItemIcon({ name }: { name: IconName }) {
 export default function ExpertiseCarousel() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [inView, setInView] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Only run the auto-advance while the carousel is on screen
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
   const total = EXPERTISE.length;
 
   const goTo = (i: number) => setIndex((i + total) % total);
@@ -330,17 +345,18 @@ export default function ExpertiseCarousel() {
   // so clicking an arrow or dot restarts the 5s countdown instead of
   // jumping again right after.
   useEffect(() => {
-    if (paused) return;
+    if (paused || !inView) return;
     const id = setTimeout(() => setIndex((i) => (i + 1) % total), AUTO_ADVANCE_MS);
     return () => clearTimeout(id);
-  }, [index, paused, total]);
+  }, [index, paused, inView, total]);
 
   return (
-    <section className="w-full overflow-hidden bg-[#F5F6F7] py-20">
+    <section id="services" className="w-full overflow-hidden bg-white py-20">View, total]);
       <div
         className="mx-auto w-full max-w-7xl px-10"
         style={{ containerType: "inline-size" }}
       >
+        <Reveal>
         <div className="flex items-end justify-between">
           <div>
             <h2 className="text-4xl font-medium text-black sm:text-5xl">
@@ -358,8 +374,10 @@ export default function ExpertiseCarousel() {
             Learn More About Our Expertise &rsaquo;
           </Link>
         </div>
+        </Reveal>
 
         {/* Carousel viewport */}
+        <Reveal delay={0.2}>
         <div
           className="mt-8"
           style={{
@@ -417,6 +435,7 @@ export default function ExpertiseCarousel() {
             ))}
           </div>
         </div>
+        </Reveal>
 
         {/* Controls */}
         <div className="mt-6 flex items-center justify-center gap-3">

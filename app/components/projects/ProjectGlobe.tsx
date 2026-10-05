@@ -29,6 +29,7 @@ const DRAG_SPEED = 90; // higher = rotates faster while dragging
 const FRICTION_MS = 325; // higher = glides longer after letting go, lower = stops sooner
 const AUTO_SPEED = 0.01; // auto-rotation speed in degrees per millisecond (0.01 = 10° per second)
 const AUTO_RESUME_MS = 5000; // how long to wait after dragging before auto-rotation resumes
+const CARD_STOP_MS = 5000; // how long after a card opens before auto-rotation stops
 
 const COLORS = {
   land: "#c9c9c9",
@@ -103,6 +104,7 @@ export default function ProjectGlobe({ onSelect, activeCode = null }: Props) {
   const velRef = useRef({ x: 0, y: 0 }); // degrees per millisecond
   const inertiaRef = useRef<number | null>(null);
   const lastInteractionRef = useRef(-Infinity); // when the user last touched the globe
+  const autoStoppedRef = useRef(false); // true once a card has been open for CARD_STOP_MS
 
   useEffect(() => {
     const el = wrapperRef.current;
@@ -129,6 +131,17 @@ export default function ProjectGlobe({ onSelect, activeCode = null }: Props) {
     };
   }, []);
 
+  // Stop auto-rotation CARD_STOP_MS after a project card opens,
+  // and let it run again as soon as the card is closed.
+  useEffect(() => {
+    autoStoppedRef.current = false;
+    if (!activeCode) return undefined;
+    const t = setTimeout(() => {
+      autoStoppedRef.current = true;
+    }, CARD_STOP_MS);
+    return () => clearTimeout(t);
+  }, [activeCode]);
+
   // Automatic rotation (right to left). Pauses while dragging or gliding,
   // and resumes AUTO_RESUME_MS after the last interaction.
   useEffect(() => {
@@ -143,6 +156,7 @@ export default function ProjectGlobe({ onSelect, activeCode = null }: Props) {
       const idle =
         dragRef.current === null &&
         inertiaRef.current === null &&
+        !autoStoppedRef.current &&
         now - lastInteractionRef.current >= AUTO_RESUME_MS;
       if (idle) {
         const [a, b] = rotationRef.current;
