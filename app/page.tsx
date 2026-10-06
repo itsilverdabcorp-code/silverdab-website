@@ -2,6 +2,7 @@ import Link from "next/link";
 import ExpertiseCarousel from "./components/expertise/ExpertiseCarousel";
 import ClientLogos from "./components/clients/ClientLogos";
 import Reveal from "./components/Reveal";
+import HeroStat from "./components/HeroStat";
 
 export default function Home() {
   return (
@@ -51,39 +52,38 @@ export default function Home() {
           </div>
 
           <div className="mt-10 flex flex-wrap items-start justify-center gap-x-20 gap-y-6">
-            <div
-              className="hero-slide-up text-left"
-              style={{ animationDelay: "1.2s" }}
-            >
-              <p className="text-5xl font-medium sm:text-7xl">26+</p>
-              <p className="mt-1 text-2xl text-zinc-200">
-                Projects
-                <br />
-                Delivered
-              </p>
-            </div>
-            <div
-              className="hero-slide-up text-left"
-              style={{ animationDelay: "1.5s" }}
-            >
-              <p className="text-5xl font-medium sm:text-7xl">13+</p>
-              <p className="mt-1 text-2xl text-zinc-200">
-                Countries
-                <br />
-                Served
-              </p>
-            </div>
-            <div
-              className="hero-slide-up text-left"
-              style={{ animationDelay: "1.8s" }}
-            >
-              <p className="text-5xl font-medium sm:text-7xl">1st</p>
-              <p className="mt-1 text-2xl text-zinc-200">
-                ISO 19650 Certified
-                <br />
-                in the Philippines
-              </p>
-            </div>
+            <HeroStat
+              value={26}
+              suffix="+"
+              label={
+                <>
+                  Projects
+                  <br />
+                  Delivered
+                </>
+              }
+            />
+            <HeroStat
+              value={13}
+              suffix="+"
+              label={
+                <>
+                  Countries
+                  <br />
+                  Served
+                </>
+              }
+            />
+            <HeroStat
+              staticText="1st"
+              label={
+                <>
+                  ISO 19650 Certified
+                  <br />
+                  in the Philippines
+                </>
+              }
+            />
           </div>
         </div>
       </section>

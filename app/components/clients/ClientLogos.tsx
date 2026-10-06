@@ -14,6 +14,18 @@ const clientLogos: LogoItem[] = [
     src: "/images/clients/straits-construction.png",
     alt: "Straits Construction",
   },
+  { src: "/images/clients/adb.png", alt: "ADB" },
+  { src: "/images/clients/aedas.png", alt: "Aedas" },
+  { src: "/images/clients/BS.png", alt: "BS" },
+  { src: "/images/clients/cmac.png", alt: "CMAC" },
+  { src: "/images/clients/dotr.png", alt: "DOTr" },
+  { src: "/images/clients/dpwh.png", alt: "DPWH" },
+  { src: "/images/clients/ee.png", alt: "EE" },
+  { src: "/images/clients/irrigation.png", alt: "Irrigation" },
+  { src: "/images/clients/jica.png", alt: "JICA" },
+  { src: "/images/clients/lufthansa-ph.png", alt: "Lufthansa Philippines" },
+  { src: "/images/clients/mongolia.png", alt: "Mongolia" },
+  { src: "/images/clients/worldbank.png", alt: "World Bank" },
 ];
 
 export default function ClientLogos() {
@@ -34,7 +46,7 @@ export default function ClientLogos() {
           direction="left"
           logoHeight={100}
           gap={110}
-          hoverSpeed={0}
+          hoverSpeed={80}
           fadeOut
           fadeOutColor="#ffffff"
           ariaLabel="Companies that trust Silverdab"

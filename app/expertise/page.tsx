@@ -3,6 +3,7 @@ import Link from "next/link";
 import ExpertiseIntro from "../components/expertise/ExpertiseIntro";
 import ServicesCarousel from "../components/services/ServicesCarousel";
 import ExpertiseTabs from "../components/expertise/ExpertiseTabs";
+import Reveal from "../components/Reveal";
 
 export const metadata: Metadata = {
   title: "Expertise | Silverdab",
@@ -16,6 +17,21 @@ export default function ExpertisePage() {
       <ExpertiseIntro />
       <ExpertiseTabs />
       <ServicesCarousel />
+
+      {/* Company video */}
+      <section className="w-full bg-white py-20">
+        <div className="mx-auto w-full max-w-7xl px-10">
+          <Reveal autoPlayVideo>
+            <video
+              className="aspect-video w-full rounded-2xl object-cover"
+              src="/videos/sdb-avp.mp4"
+              controls
+              muted
+              playsInline
+            />
+          </Reveal>
+        </div>
+      </section>
 
       {/* Let's Put Our Expertise to Work */}
       <section className="w-full bg-[#F5F6F7] py-24">

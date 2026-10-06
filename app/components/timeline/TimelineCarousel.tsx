@@ -366,7 +366,7 @@ export default function TimelineCarousel() {
               aria-live="polite"
             >
               <div>
-                <p className="text-6xl font-normal leading-none tabular-nums sm:text-7xl">
+                <p className="text-6xl font-medium leading-none tabular-nums sm:text-7xl">
                   {Number.isNaN(Number(current.year)) ? (
                     <span
                       key={current.year}

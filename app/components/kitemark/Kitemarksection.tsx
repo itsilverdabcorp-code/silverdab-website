@@ -5,7 +5,9 @@ import { useEffect, useRef, useState } from "react";
 
 // ---- Easy settings -------------------------------------------------------
 const LOGO_SRC = "/images/bsi-kitemark.png"; // your BSI logo in /public/images
-const CERTIFICATE_URL = "/certificates/iso-19650.pdf"; // or the BSI certificate link
+const CERTIFICATE_URL = encodeURI(
+  "/Silverdab Corporation's BSI Kitemark ISO 19650 Certificate - KM 777798 - 001.pdf"
+);
 const DELAY_TO_SLIDE_MS = 1400; // pause after the text pops out, before it slides
 const DELAY_TO_BUTTON_MS = 1400; // pause after the slide, before the button shows
 // --------------------------------------------------------------------------
@@ -17,6 +19,7 @@ export default function KitemarkSection() {
   const started = useRef(false);
   // 0 = hidden, 1 = text popped out, 2 = slid right + logo in, 3 = button shown
   const [stage, setStage] = useState(0);
+  const [showCert, setShowCert] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -60,6 +63,21 @@ export default function KitemarkSection() {
     };
   }, []);
 
+  // Popup: close on Escape and lock page scroll while it's open
+  useEffect(() => {
+    if (!showCert) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setShowCert(false);
+    };
+    window.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [showCert]);
+
   const aligned = stage >= 2;
 
   // Each text line is centered at first, then slides to the left edge
@@ -94,10 +112,9 @@ export default function KitemarkSection() {
               className="h-auto w-[220px]"
             />
 
-            <a
-              href={CERTIFICATE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => setShowCert(true)}
               aria-hidden={stage < 3}
               tabIndex={stage >= 3 ? 0 : -1}
               className={`mt-3 rounded-full px-3.5 py-1 text-xs font-medium text-sky-600 transition-all duration-700 hover:bg-sky-500 hover:text-white ${
@@ -107,7 +124,7 @@ export default function KitemarkSection() {
               }`}
             >
               View Certificate
-            </a>
+            </button>
           </div>
         </div>
 
@@ -142,6 +159,40 @@ export default function KitemarkSection() {
           </p>
         </div>
       </div>
+
+      {showCert && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="BSI Kitemark ISO 19650 Certificate"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+          onClick={() => setShowCert(false)}
+        >
+          <div
+            className="flex h-[85vh] w-full max-w-4xl flex-col overflow-hidden rounded-lg bg-white shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between border-b border-zinc-200 px-4 py-2">
+              <p className="text-sm font-medium text-zinc-800">
+                BSI Kitemark ISO 19650 Certificate
+              </p>
+              <button
+                type="button"
+                onClick={() => setShowCert(false)}
+                aria-label="Close certificate"
+                className="grid size-8 place-items-center rounded-full text-zinc-600 hover:bg-zinc-100"
+              >
+                ✕
+              </button>
+            </div>
+            <iframe
+              src={CERTIFICATE_URL}
+              title="BSI Kitemark ISO 19650 Certificate"
+              className="w-full flex-1"
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 }
