@@ -19,7 +19,7 @@ export async function POST(req: Request) {
 
     const { error } = await resend.emails.send({
       from: "Silverdab Website <no-reply@silverdab.com>",
-      to: ["amorales@silverdab.com", "sramos@silverdab.com"],
+      to: ["amorales@silverdab.com", "sramos@silverdab.com", "hpatenio@silverdab.com"],
       replyTo: email, // hitting Reply goes to the visitor
       subject: `New contact message from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
