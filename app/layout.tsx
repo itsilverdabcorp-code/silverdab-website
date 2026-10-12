@@ -65,7 +65,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Script
           defer
           src="https://analytics.silvergraph.ai/script.js"
-          data-website-id="13ff8a57-af8f-4aad-ab9d-9db0398b9cc3"
+          data-website-id="5a13a899-393d-4c5a-a0be-a442797627da"
+          data-domains="silverdab.com,www.silverdab.com"
           strategy="afterInteractive"
         />
       </body>
