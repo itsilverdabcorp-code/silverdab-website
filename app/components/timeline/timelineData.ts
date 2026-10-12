@@ -130,6 +130,10 @@ export const timeline: TimelineItem[] = [
         title: "Still Growing",
         text: "From ISO 9001:2015 to PAS 2080, we continue raising the standard for what BIM can deliver.",
       },
+      {
+        title: "Strategic Partnership",
+        text: "BasisSoft, Inc. signed an MoU with Silverdab Corporation to cooperate on BIM design and construction consulting, digital engineering, and international projects, accelerating joint expansion in the global infrastructure market.",
+      },
     ],
   },
 ];

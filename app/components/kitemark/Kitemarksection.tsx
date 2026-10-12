@@ -117,7 +117,7 @@ export default function KitemarkSection() {
               onClick={() => setShowCert(true)}
               aria-hidden={stage < 3}
               tabIndex={stage >= 3 ? 0 : -1}
-              className={`mt-3 rounded-full px-3.5 py-1 text-xs font-medium text-sky-600 transition-all duration-700 hover:bg-sky-500 hover:text-white ${
+              className={`mt-3 px-2 py-1 text-xs font-medium text-zinc-500 underline-offset-4 transition-all duration-300 hover:text-sky-500 hover:underline text-[14px] ${
                 stage >= 3
                   ? "translate-y-0 opacity-100"
                   : "pointer-events-none translate-y-3 opacity-0"
@@ -136,10 +136,10 @@ export default function KitemarkSection() {
         >
           <h2 className="text-3xl font-medium leading-tight text-black sm:text-4xl lg:text-[2.75rem]">
             <span className={`block ${line}`}>
-              BSI Kitemark&trade; ISO 19650 Certified
+              ISO 19650 Kitemark Certified 
             </span>
             <span className={`mt-2 block ${line}`}>
-              First in the{" "}
+              in the{" "}
               <span
                 className="bg-clip-text font-semibold text-transparent"
                 style={{
@@ -155,7 +155,7 @@ export default function KitemarkSection() {
           <p
             className={`mt-3 text-sm italic text-zinc-800 sm:text-base ${line}`}
           >
-            Setting the standard for BIM excellence.
+            First in the country. Setting the standard for BIM.
           </p>
         </div>
       </div>

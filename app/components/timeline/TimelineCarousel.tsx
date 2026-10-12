@@ -12,7 +12,7 @@ function useVisibleCount() {
   useEffect(() => {
     const md = window.matchMedia("(min-width: 768px)");
     const lg = window.matchMedia("(min-width: 1024px)");
-    const update = () => setCount(lg.matches ? 4 : md.matches ? 2 : 1);
+    const update = () => setCount(lg.matches ? 4 : md.matches ? 3 : 2);
     update();
     md.addEventListener("change", update);
     lg.addEventListener("change", update);
@@ -481,7 +481,7 @@ export default function TimelineCarousel() {
             <ChevronIcon direction="left" />
           </button>
 
-          <div className="flex items-center gap-3.5 rounded-full bg-white/10 px-5 py-3">
+          <div className="flex items-center gap-3.5 rounded-full bg-white/10 px-6 py-4">
             {timeline.map((item, i) => (
               <button
                 key={item.year}
@@ -489,8 +489,8 @@ export default function TimelineCarousel() {
                 onClick={() => goTo(i)}
                 aria-label={`Page ${i + 1}: ${item.year}`}
                 aria-current={i === active}
-                className={`h-2 rounded-full transition-all duration-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
-                  i === active ? "w-5 bg-white" : "w-2 bg-white/40 hover:bg-white/70"
+                className={`h-2 rounded-full transition-all duration-500 focus-visible:outline-2 focus-visible:outline-offset- focus-visible:outline-white ${
+                  i === active ? "w-2 bg-white" : "w-2 bg-white/20 hover:bg-white/70"
                 }`}
               />
             ))}

@@ -138,38 +138,40 @@ export default function ServicesCarousel() {
         </Reveal>
 
         {/* Controls */}
-        <Reveal delay={0.4}>
-        <div className="mt-6 flex items-center justify-center gap-3">
-          <button
-            onClick={() => goTo(index - 1)}
-            aria-label="Previous"
-            className="flex h-7 w-7 items-center justify-center rounded-full bg-zinc-200 text-xs text-zinc-700 transition-colors hover:bg-zinc-300"
-          >
-            &lsaquo;
-          </button>
+        <div className="mt-8 flex items-center justify-center gap-4">
+            <button
+              onClick={() => goTo(index - 1)}
+              aria-label="Previous"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-[#e8e8ed] text-[#1d1d1f] transition-colors hover:bg-[#d2d2d7]"
+            >
+              <svg width="9" height="14" viewBox="0 0 9 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M7.5 1.5 2 7l5.5 5.5" />
+              </svg>
+            </button>
 
-          <div className="flex items-center gap-3 rounded-full bg-zinc-200 px-4 py-2">
-            {SERVICES.map((card, i) => (
-              <button
-                key={card.title}
-                onClick={() => goTo(i)}
-                aria-label={`Go to ${card.title}`}
-                className={`h-1.5 w-1.5 rounded-full transition-colors ${
-                  i === index ? "bg-zinc-800" : "bg-zinc-400"
-                }`}
-              />
-            ))}
+            <div className="flex h-9 items-center gap-[15px] rounded-full bg-[#e8e8ed] px-7">
+              {SERVICES.map((card, i) => (
+                <button
+                  key={card.title}
+                  onClick={() => goTo(i)}
+                  aria-label={`Go to ${card.title}`}
+                  className={`size-[9px] rounded-full transition-colors duration-300 ${
+                    i === index ? "bg-[#1d1d1f]" : "bg-[#86868b] hover:bg-[#6e6e73]"
+                  }`}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={() => goTo(index + 1)}
+              aria-label="Next"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-[#e8e8ed] text-[#1d1d1f] transition-colors hover:bg-[#d2d2d7]"
+            >
+              <svg width="9" height="14" viewBox="0 0 9 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M1.5 1.5 7 7l-5.5 5.5" />
+              </svg>
+            </button>
           </div>
-
-          <button
-            onClick={() => goTo(index + 1)}
-            aria-label="Next"
-            className="flex h-7 w-7 items-center justify-center rounded-full bg-zinc-200 text-xs text-zinc-700 transition-colors hover:bg-zinc-300"
-          >
-            &rsaquo;
-          </button>
-        </div>
-        </Reveal>
       </div>
     </section>
   );

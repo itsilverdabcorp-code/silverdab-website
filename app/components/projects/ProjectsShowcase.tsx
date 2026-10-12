@@ -103,18 +103,17 @@ function Card({ item }: { item: ListItem }) {
     <article className="flex w-[260px] shrink-0 snap-start flex-col sm:w-[300px]">
       <CardMedia video={item.video} />
       <div className="flex flex-1 flex-col items-center px-2 pt-6 text-center">
-        <h3 className="text-[17px] font-medium leading-snug text-zinc-900">{item.name}</h3>
+        <h3 className="text-xl font-medium leading-snug text-zinc-900">{item.name}</h3>
         {item.place && (
-          <p className="mt-1 text-[13px] font-semibold text-zinc-900">{item.place}</p>
+          <p className="mt-1 text-base font-semibold text-zinc-900">{item.place}</p>
         )}
         {item.description && (
-          <p className="mt-5 text-[13px] leading-snug text-zinc-700">{item.description}</p>
+          <p className="mt-5 text-xs leading-snug text-zinc-700">{item.description}</p>
         )}
         {item.logos && item.logos.length > 0 && (
-          <div className="mt-auto flex items-center justify-center gap-2 pt-6">
+          <div className="mt-auto flex flex-wrap items-center justify-center gap-3 pt-6">
             {item.logos.map((l) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img key={l} src={l} alt="" className="h-9 w-auto max-w-[110px] object-contain" />
+              <img key={l} src={l} alt="" className="h-14 w-auto max-w-[140px] object-contain" />
             ))}
           </div>
         )}
@@ -198,14 +197,14 @@ export default function ProjectsShowcase() {
           <button
             onClick={() => scrollByCard(-1)}
             aria-label="Scroll left"
-            className="flex h-7 w-7 items-center justify-center rounded-full bg-zinc-300 text-zinc-700 hover:bg-zinc-400"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-300 text-2xl text-zinc-700 hover:bg-zinc-400"
           >
             ‹
           </button>
           <button
             onClick={() => scrollByCard(1)}
             aria-label="Scroll right"
-            className="flex h-7 w-7 items-center justify-center rounded-full bg-zinc-300 text-zinc-700 hover:bg-zinc-400"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-300 text-2xl text-zinc-700 hover:bg-zinc-400"
           >
             ›
           </button>
