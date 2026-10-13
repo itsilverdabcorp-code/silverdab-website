@@ -30,8 +30,7 @@ export async function POST(req: Request) {
       to: [
         "itsilverdabcorp@gmail.com",
         "amorales@silverdab.com",
-        "asualog@silverdab.com",
-        "hpatenio@silverdab.com",
+        "sramos@silverdab.com",
       ],
       replyTo: email, // hitting Reply goes to the visitor
       subject: subject?.trim() || `New contact message from ${name}`,

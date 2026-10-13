@@ -69,7 +69,7 @@ export default function ContactForm() {
 
       <Reveal delay={0.5} className="mt-4">
         <label htmlFor="email" className={labelCls}>Email</label>
-        <input id="email" name="email" type="email" required placeholder="Email Address" className={inputCls} />
+        <input id="email" name="email" type="email" required placeholder="name@company.com" className={inputCls} />
       </Reveal>
 
       <Reveal delay={0.6} className="relative z-30 mt-4">
@@ -114,7 +114,7 @@ export default function ContactForm() {
             name="phone"
             type="tel"
             inputMode="tel"
-            placeholder="Number"
+            placeholder="912 345 6789"
             className="min-w-0 flex-1 rounded-r-lg bg-transparent px-3 py-2.5 text-sm text-black outline-none placeholder:text-gray-400"
           />
         </div>
@@ -122,12 +122,12 @@ export default function ContactForm() {
 
       <Reveal delay={0.7} className="mt-4">
         <label htmlFor="subject" className={labelCls}>Subject</label>
-        <input id="subject" name="subject" placeholder="Silverdab Form" className={inputCls} />
+        <input id="subject" name="subject" placeholder="How can we help?" className={inputCls} />
       </Reveal>
 
       <Reveal delay={0.8} className="mt-4">
         <label htmlFor="message" className={labelCls}>Message</label>
-        <textarea id="message" name="message" required rows={5} placeholder="Your message here" className={`${inputCls} resize-none`} />
+        <textarea id="message" name="message" required rows={5} placeholder="Tell us about your project or inquiry" className={`${inputCls} resize-none`} />
       </Reveal>
 
       <Reveal delay={0.9} className="mt-4">
@@ -148,7 +148,7 @@ export default function ContactForm() {
       )}
 
       <Reveal delay={1}>
-      <p className="mt-4 text-[11px] text-black">
+      <p className="mt-4 text-[13px] text-black">
         Note: Please send your CV and portfolio to{" "}
         <a href="mailto:info@silverdab.com" className="text-blue-600 underline">
           info@silverdab.com

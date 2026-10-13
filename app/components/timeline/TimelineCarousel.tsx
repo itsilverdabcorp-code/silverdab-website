@@ -7,12 +7,12 @@ import CountUp from "./CountUp";
 
 /** How many timeline columns fit on screen at the current width. */
 function useVisibleCount() {
-  const [count, setCount] = useState(4);
+  const [count, setCount] = useState(3);
 
   useEffect(() => {
     const md = window.matchMedia("(min-width: 768px)");
     const lg = window.matchMedia("(min-width: 1024px)");
-    const update = () => setCount(lg.matches ? 4 : md.matches ? 3 : 2);
+    const update = () => setCount(lg.matches ? 3 : md.matches ? 2 : 1);
     update();
     md.addEventListener("change", update);
     lg.addEventListener("change", update);
@@ -28,7 +28,7 @@ function useVisibleCount() {
 const clamp3 = (n: number) => Math.min(Math.max(n, 0), 3);
 
 const AUTOPLAY_MS = 5000; // auto-advance speed
-const CLOSING_TEXT = "Still Growing, Still Going....";
+const CLOSING_TEXT = "Still Growing, Still Going...";
 
 export default function TimelineCarousel() {
   const visible = useVisibleCount();
@@ -137,14 +137,14 @@ export default function TimelineCarousel() {
     // Years further from the active one fade a little
     const focusStyle = {
       opacity: [1, 0.9, 0.8, 0.5][dist],
-      transition: "opacity 700ms ease",
+      transition: instant ? "none" : "opacity 700ms ease",
     };
 
     return (
       <li
         key={key}
         aria-hidden={hidden || undefined}
-        className="shrink-0 pr-6"
+        className="shrink-0 pr-10"
         style={{ width: `calc(100cqw / ${visible})` }}
         data-ghost={!looped && key.startsWith("pre-") ? "true" : undefined}
       >
@@ -152,19 +152,21 @@ export default function TimelineCarousel() {
           {item.year}
         </p>
 
-        <div className="relative mt-3 -mr-6 h-4">
+        <div className="relative mt-3 -mr-10 h-4">
           {extendLeft && (
-            <span className="absolute right-full top-1/2 h-px w-screen -translate-y-1/2 bg-sky-500/60" />
+            <span className="absolute right-full top-1/2 h-px w-screen -translate-y-1/2 bg-[#0f4a6e]" />
           )}
           {extendRight && (
-            <span className="absolute left-full top-1/2 h-px w-screen -translate-y-1/2 bg-sky-500/60" />
+            <span className="absolute left-full top-1/2 h-px w-screen -translate-y-1/2 bg-[#0f4a6e]" />
           )}
           <span
-            className={`absolute inset-x-0 top-1/2 h-px -translate-y-1/2 transition-all duration-500 ${
-              isActive
-                ? "bg-sky-300 shadow-[0_0_8px_1px_rgba(56,189,248,0.7)]"
-                : "bg-sky-500/60"
-            }`}
+            className={`absolute inset-x-0 top-1/2 h-px -translate-y-1/2 ${
+            instant ? "" : "transition-all duration-500"
+          } ${
+            isActive
+              ? "bg-sky-300 shadow-[0_0_8px_1px_rgba(56,189,248,0.7)]"
+              : "bg-[#0f4a6e]"
+          }`}
           />
           <button
             type="button"
@@ -172,7 +174,9 @@ export default function TimelineCarousel() {
             tabIndex={hidden ? -1 : undefined}
             aria-label={`Go to ${item.year}: ${item.label}`}
             aria-current={isActive}
-            className={`relative block size-4 rounded-full transition-colors duration-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
+            className={`relative block size-4 rounded-full ${
+              instant ? "" : "transition-colors duration-500"
+            } focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
               isActive
                 ? "bg-sky-300 shadow-[0_0_12px_2px_rgba(125,211,252,0.6)]"
                 : "bg-[#1e8bb5] hover:bg-sky-400"
@@ -181,20 +185,19 @@ export default function TimelineCarousel() {
         </div>
 
         <div
-          className="mt-8 w-full max-w-[220px] overflow-hidden rounded-lg"
+          className="relative mt-8 h-[150px] w-full max-w-[240px] overflow-hidden rounded-lg"
           style={focusStyle}
         >
           <Image
             src={item.image}
             alt={item.events[0].title}
-            width={0}
-            height={0}
-            sizes="220px"
-            className="block h-auto w-full"
+            fill
+            sizes="300px"
+            className="object-contain object-left-top"
           />
         </div>
 
-        <div className="mt-6 max-w-[220px] space-y-6" style={focusStyle}>
+        <div className="mt-6 max-w-[320px] space-y-6" style={focusStyle}>
           {item.events.map((event) => (
             <div key={event.title}>
               <h3 className="text-lg font-normal text-white">{event.title}</h3>
@@ -209,15 +212,16 @@ export default function TimelineCarousel() {
   };
 
   const renderClosing = (
-    key: string,
-    dist: number,
-    shine: boolean,
-    hidden: boolean
+  key: string,
+  dist: number,
+  shine: boolean,
+  hidden: boolean,
+  show: boolean
   ) => (
     <li
       key={key}
       aria-hidden={hidden || undefined}
-      className="shrink-0 pr-6"
+      className="shrink-0 pr-10"
       style={{ width: `calc(100cqw / ${visible} * ${closingSpan})` }}
       data-ghost={!looped && key.startsWith("pre-") ? "true" : undefined}
     >
@@ -225,21 +229,26 @@ export default function TimelineCarousel() {
       <p className="invisible text-lg" aria-hidden="true">
         &nbsp;
       </p>
-      <div className="relative mt-3 -mr-6 h-4">
-        <span className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-sky-500/60" />
+      <div className="relative mt-3 -mr-10 h-4">
+        <span
+        className={`absolute inset-x-0 top-1/2 h-px -translate-y-1/2 ${
+          instant ? "" : "transition-all duration-500"
+        } ${
+          show
+            ? "bg-sky-300 shadow-[0_0_8px_1px_rgba(56,189,248,0.7)]"
+            : "bg-[#0f4a6e]"
+        }`}
+      />
       </div>
 
       <div
-        className="mt-8 flex min-h-[137px] items-center"
-        style={{
-          opacity: [1, 0.9, 0.8, 0.5][dist],
-          transition: "opacity 700ms ease",
-        }}
+        className="mt-8 flex min-h-[137px] items-start"
+        style={{ opacity: show ? 1 : 0 }}
       >
         <p
           className={`${
             shine ? "tl-closing-shine" : "tl-closing-static"
-          } w-fit max-w-full bg-clip-text text-3xl font-medium leading-tight text-transparent sm:text-4xl`}
+          } w-fit max-w-full bg-clip-text text-4xl font-medium leading-tight text-transparent sm:text-5xl`}
         >
           {CLOSING_TEXT}
         </p>
@@ -321,14 +330,21 @@ export default function TimelineCarousel() {
         .tl-closing-static {
           background-image: linear-gradient(90deg, #38b6d8 0%, #1f5bb0 100%);
         }
+        @keyframes tl-closing-wipe {
+          from { -webkit-mask-position: 100% 0; mask-position: 100% 0; }
+          to   { -webkit-mask-position: 0% 0;   mask-position: 0% 0; }
+        }
         .tl-closing-shine {
-          background-image:
-            linear-gradient(90deg, transparent 0%, transparent 55%, rgba(190, 235, 255, 0.95) 60%, #12365f 64%, #12365f 100%),
-            linear-gradient(90deg, #38b6d8 0%, #1f5bb0 100%);
-          background-size: 300% 100%, 100% 100%;
-          background-repeat: no-repeat;
-          background-position: 0% 0, 0 0;
-          animation: tl-shine 2000ms cubic-bezier(0.45, 0, 0.25, 1) 500ms both;
+          background-image: linear-gradient(90deg, #38b6d8 0%, #1f5bb0 100%);
+          -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 40%, transparent 60%);
+          mask-image: linear-gradient(90deg, #000 0%, #000 40%, transparent 60%);
+          -webkit-mask-size: 300% 100%;
+          mask-size: 300% 100%;
+          -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+          -webkit-mask-position: 100% 0;
+          mask-position: 100% 0;
+          animation: tl-closing-wipe 2000ms cubic-bezier(0.45, 0, 0.25, 1) 500ms both;
         }
 
         /* Copies to the left of 2019 stay invisible until the first loop (the line stays) */
@@ -339,6 +355,7 @@ export default function TimelineCarousel() {
           .tl-year-next, .tl-year-prev, .tl-year-tick,
           .tl-heading-line, .tl-shine-text, .tl-year-intro,
           .tl-enter, .tl-closing-shine { animation: none; }
+          .tl-closing-shine { -webkit-mask-image: none; mask-image: none; }
           .tl-track { transition: none !important; }
         }
       `}</style>
@@ -362,7 +379,7 @@ export default function TimelineCarousel() {
             </h2>
 
             <div
-              className="tl-year-intro mt-14 border-l-2 border-blue-600 pl-4"
+              className="tl-year-intro mt-14 border-l-3 border-blue-600 pl-8"
               aria-live="polite"
             >
               <div>
@@ -392,7 +409,7 @@ export default function TimelineCarousel() {
 
           <div className="tl-enter relative hidden h-40 w-40 shrink-0 md:block lg:h-56 lg:w-56">
             <Image
-              src="/images/silverdab-logo.png"
+              src="/images/silverdab-logo.svg"
               alt="Silverdab logo mark"
               fill
               sizes="224px"
@@ -437,7 +454,8 @@ export default function TimelineCarousel() {
               "pre-closing",
               clamp3(Math.ceil(Math.abs(-0.5 - cur) - 0.5)),
               false,
-              true
+              true,
+              false
             )}
 
             {/* The real timeline */}
@@ -454,7 +472,8 @@ export default function TimelineCarousel() {
               "closing",
               clamp3(Math.ceil(Math.abs(last + 0.5 - cur) - 0.5)),
               cur === last,
-              false
+              false,
+              cur === last
             )}
             {timeline.map((item, k) =>
               renderYear(item, `post-${item.year}`, {
@@ -489,7 +508,7 @@ export default function TimelineCarousel() {
                 onClick={() => goTo(i)}
                 aria-label={`Page ${i + 1}: ${item.year}`}
                 aria-current={i === active}
-                className={`h-2 rounded-full transition-all duration-500 focus-visible:outline-2 focus-visible:outline-offset- focus-visible:outline-white ${
+                className={`h-2 rounded-full transition-all duration-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
                   i === active ? "w-2 bg-white" : "w-2 bg-white/20 hover:bg-white/70"
                 }`}
               />
@@ -525,6 +544,55 @@ function ChevronIcon({ direction }: { direction: "left" | "right" }) {
       aria-hidden="true"
     >
       <path d={direction === "left" ? "M10 3 5 8l5 5" : "M6 3l5 5-5 5"} />
+    </svg>
+  );
+}
+
+const LOGO_DOTS = [
+  // [angle in degrees (0 = top, clockwise), radius, color]
+  [-95, 5, "#4fb8e0"],
+  [-85, 6, "#4fb8e0"],
+  [-72, 8, "#4fb8e0"],
+  [-58, 11, "#4fb8e0"],
+  [-42, 15, "#4fb8e0"],
+  [-25, 19, "#4fb8e0"],
+  [-5, 26, "#4fb8e0"],
+  [20, 34, "#2fa3d4"],
+  [48, 6, "#5a5a5e"],
+  [60, 7, "#5a5a5e"],
+  [75, 9, "#5a5a5e"],
+  [90, 12, "#5a5a5e"],
+  [108, 16, "#5a5a5e"],
+  [128, 20, "#5a5a5e"],
+  [150, 24, "#5a5a5e"],
+  [170, 32, "#5a5a5e"],
+] as const;
+
+function AnimatedLogo() {
+  const R = 120; // ring radius
+  return (
+    <svg
+      viewBox="-200 -200 400 400"
+      className="h-full w-full"
+      role="img"
+      aria-label="Silverdab logo mark"
+    >
+      {LOGO_DOTS.map(([deg, r, color], i) => {
+        const a = (deg * Math.PI) / 180;
+        const x = Math.sin(a) * R;
+        const y = -Math.cos(a) * R;
+        return (
+          <circle
+            key={i}
+            className="tl-dot"
+            cx={x}
+            cy={y}
+            r={r * 1.6}
+            fill={color}
+            style={{ animationDelay: `${600 + i * 140}ms` }}
+          />
+        );
+      })}
     </svg>
   );
 }

@@ -3,6 +3,7 @@ import Reveal from "../Reveal"; // adjust path to where your Reveal lives
 const offices = [
   {
     country: "Philippines",
+    mapUrl: "https://maps.app.goo.gl/5KbFvPmtE3UUtE8J8",
     address: [
       "7F Unit 3, Hexagon",
       "Corporate Center, 1471",
@@ -13,6 +14,7 @@ const offices = [
   },
   {
     country: "Singapore",
+    mapUrl: "https://maps.app.goo.gl/Mbi1K49oa6WbtzRd9",
     address: [
       "Unit 2008 1 Fullerton Rd,",
       "#02-01 One Fullerton,",
@@ -74,13 +76,20 @@ export default function ContactInfo() {
             <PinIcon />
             <div>
               <h3 className="text-lg font-medium">{o.country}</h3>
-              <address className="mt-3 text-sm not-italic leading-snug">
-                {o.address.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-              </address>
+              <a
+                href={o.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block hover:underline"
+              >
+                <address className="mt-3 text-sm not-italic leading-snug">
+                  {o.address.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </address>
+              </a>
             </div>
           </Reveal>
         ))}
@@ -95,13 +104,6 @@ export default function ContactInfo() {
         <a href="#" aria-label="LinkedIn">
           <svg viewBox="0 0 24 24" className="h-8 w-8" fill="currentColor">
             <path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm1.3 7.5V18h2.4v-7.5H6.3ZM7.5 6.2a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8Zm3.2 4.3V18h2.4v-4c0-1.1.5-1.8 1.4-1.8s1.3.7 1.3 1.8V18h2.4v-4.6c0-2-1.1-3.1-2.7-3.1-1.1 0-1.8.6-2.1 1.1v-.9h-2.7Z" />
-          </svg>
-        </a>
-        <a href="#" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="2.2">
-            <rect x="3" y="3" width="18" height="18" rx="5" />
-            <circle cx="12" cy="12" r="4" />
-            <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
           </svg>
         </a>
       </Reveal>

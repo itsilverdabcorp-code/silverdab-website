@@ -123,7 +123,7 @@ export const timeline: TimelineItem[] = [
   {
     year: "Beyond",
     label: "Still Growing",
-    image: `${dir}/beyond.png`,
+    image: `${dir}/beyond.svg`,
     fit: "contain",
     events: [
       {
@@ -131,8 +131,8 @@ export const timeline: TimelineItem[] = [
         text: "From ISO 9001:2015 to PAS 2080, we continue raising the standard for what BIM can deliver.",
       },
       {
-        title: "Strategic Partnership",
-        text: "BasisSoft, Inc. signed an MoU with Silverdab Corporation to cooperate on BIM design and construction consulting, digital engineering, and international projects, accelerating joint expansion in the global infrastructure market.",
+        title: "MoU with BasisSoft",
+        text: "BasisSoft and Silverdab signed an MoU to collaborate on BIM consulting, digital engineering, and global projects.",
       },
     ],
   },
