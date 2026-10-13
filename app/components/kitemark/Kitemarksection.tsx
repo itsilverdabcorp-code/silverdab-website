@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 // ---- Easy settings -------------------------------------------------------
 const LOGO_SRC = "/images/bsi-kitemark.png"; // your BSI logo in /public/images
 const CERTIFICATE_URL = encodeURI(
-  "/Silverdab Corporation's BSI Kitemark ISO 19650 Certificate - KM 777798 - 001.pdf"
+  "/ISO 19650 Kitemark Certified.pdf"
 );
 const DELAY_TO_SLIDE_MS = 1400; // pause after the text pops out, before it slides
 const DELAY_TO_BUTTON_MS = 1400; // pause after the slide, before the button shows
