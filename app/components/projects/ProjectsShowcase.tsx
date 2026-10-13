@@ -103,9 +103,9 @@ function Card({ item }: { item: ListItem }) {
     <article className="flex w-[260px] shrink-0 snap-start flex-col sm:w-[300px]">
       <CardMedia video={item.video} />
       <div className="flex flex-1 flex-col items-center px-2 pt-6 text-center">
-        <h3 className="text-xl font-medium leading-snug text-zinc-900">{item.name}</h3>
+        <h3 className="text-xl font-semibold leading-snug text-zinc-900">{item.name}</h3>
         {item.place && (
-          <p className="mt-1 text-base font-semibold text-zinc-900">{item.place}</p>
+          <p className="mt-1 text-base font-medium text-zinc-900">{item.place}</p>
         )}
         {item.description && (
           <p className="mt-5 text-xs leading-snug text-zinc-700">{item.description}</p>

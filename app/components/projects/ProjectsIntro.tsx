@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
+import CountNumber from "./CountNumber";
 
 // Timing (in ms). Each gradient text fades up first, then the shine runs.
 const T = {
@@ -12,17 +13,26 @@ const T = {
 
 const vars = (v: Record<string, string>) => v as CSSProperties;
 
-function Stat({ value, label }: { value: string; label: ReactNode }) {
+function Stat({
+  value,
+  suffix,
+  label,
+}: {
+  value: number;
+  suffix: string;
+  label: ReactNode;
+}) {
   return (
-    <div className="text-left">
+    <div className="flex flex-col items-center text-center">
       <p
-        className="pi-shine mx-auto w-fit bg-clip-text text-7xl font-medium leading-none text-transparent sm:text-8xl"
+        data-final={`${value}${suffix}`}
+        className="pi-shine pi-count w-fit bg-clip-text text-7xl font-medium leading-none text-transparent sm:text-8xl"
         style={vars({
           "--pi-fade": `${T.statFade}ms`,
           "--pi-shine": `${T.statShine}ms`,
         })}
       >
-        {value}
+        <CountNumber value={value} suffix={suffix} />
       </p>
       <p
         className="pi-fade mt-3 text-2xl leading-snug text-black"
@@ -65,6 +75,15 @@ export default function ProjectsIntro() {
             pi-shine 2000ms cubic-bezier(0.45, 0, 0.25, 1) var(--pi-shine, 0ms) both;
         }
 
+        /* Reserves the final number's width so nothing shifts while counting */
+        .pi-count::before {
+          content: attr(data-final);
+          display: block;
+          height: 0;
+          overflow: hidden;
+          visibility: hidden;
+        }
+
         @media (prefers-reduced-motion: reduce) {
           .pi-fade, .pi-shine { animation: none; }
         }
@@ -97,23 +116,23 @@ export default function ProjectsIntro() {
           teams working on the ground.
         </p>
 
-        <div className="mt-10 text-xl flex flex-wrap items-start justify-center gap-x-20 gap-y-8">
+        <div className="mt-10 flex flex-wrap items-start justify-center gap-x-20 gap-y-8">
           <Stat
-            value="26+"
+            value={26}
+            suffix="+"
             label={
               <>
                 Projects
-                <br />
                 Delivered
               </>
             }
           />
           <Stat
-            value="13+"
+            value={13}
+            suffix="+"
             label={
               <>
                 Countries
-                <br />
                 Served
               </>
             }

@@ -21,69 +21,75 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/40" />
 
         <div className="relative z-10 flex flex-col items-center gap-6 px-6 py-24 text-center text-white">
-          <p className="hero-slide-in text-5xl font-normal">
+          <p className="hero-fade-in text-5xl font-normal">
             Welcome to Silverdab!
           </p>
 
           <h1
-            className="hero-slide-in max-w-6xl whitespace-nowrap text-5xl font-medium leading-tight sm:text-6xl lg:text-7xl"
+            className="hero-fade-in max-w-6xl whitespace-nowrap text-5xl font-medium leading-tight sm:text-6xl lg:text-7xl"
             style={{ animationDelay: "0.3s" }}
           >
             Building Smarter, For a Better World
           </h1>
 
-          <div
-            className="hero-slide-up flex flex-wrap items-center justify-center gap-4"
-            style={{ animationDelay: "0.8s" }}
-          >
-            <Link
-              href="/contact"
-              className="rounded-full bg-sky-400 px-6 py-2.5 text-xl font-normal text-white transition-colors hover:bg-sky-500"
-            >
-              Let&apos;s Connect
-            </Link>
+          <div className="hero-reveal">
+            <div className="min-h-0 overflow-hidden">
+              <div className="flex flex-col items-center">
+                <div
+                  className="hero-slide-up flex flex-wrap items-center justify-center gap-4"
+                  style={{ animationDelay: "1.3s" }}
+                >
+                  <Link
+                    href="/contact"
+                    className="rounded-full bg-sky-400 px-6 py-2.5 text-xl font-normal text-white transition-colors hover:bg-sky-500"
+                  >
+                    Let&apos;s Connect
+                  </Link>
 
-            <Link
-              href="/projects"
-              className="rounded-full border border-white px-6 py-2.5 text-xl font-normal text-white transition-colors hover:bg-white/10"
-            >
-              Explore Projects
-            </Link>
-          </div>
+                  <Link
+                    href="/projects"
+                    className="rounded-full border border-white px-6 py-2.5 text-xl font-normal text-white transition-colors hover:bg-white/10"
+                  >
+                    Explore Projects
+                  </Link>
+                </div>
 
-          <div className="mt-10 flex flex-wrap items-start justify-center gap-x-20 gap-y-6">
-            <HeroStat
-              value={26}
-              suffix="+"
-              label={
-                <>
-                  Projects
-                  <br />
-                  Delivered
-                </>
-              }
-            />
-            <HeroStat
-              value={13}
-              suffix="+"
-              label={
-                <>
-                  Countries
-                  <br />
-                  Served
-                </>
-              }
-            />
-            <HeroStat
-              staticText="1st"
-              label={
-                <>
-                  ISO 19650 Certified
-                  <br />
-                  in the Philippines
-                </>
-              }
-            />
+                <div className="mt-24 flex flex-wrap items-start justify-center gap-x-20 gap-y-6">
+                  <HeroStat
+                    value={26}
+                    suffix="+"
+                    label={
+                      <>
+                        Projects
+                        <br />
+                        Delivered
+                      </>
+                    }
+                  />
+                  <HeroStat
+                    value={13}
+                    suffix="+"
+                    label={
+                      <>
+                        Countries
+                        <br />
+                        Served
+                      </>
+                    }
+                  />
+                  <HeroStat
+                    staticText="1st"
+                    label={
+                      <>
+                        ISO 19650 Certified
+                        <br />
+                        in the Philippines
+                      </>
+                    }
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

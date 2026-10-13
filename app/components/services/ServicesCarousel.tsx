@@ -85,7 +85,7 @@ export default function ServicesCarousel() {
           <h2 className="text-4xl font-medium text-black sm:text-5xl">
             Our Services
           </h2>
-          <p className="mt-3 text-sm text-zinc-700">
+          <p className="mt-3 text-xl text-zinc-700">
             Specialized applications within BIM Modelling, built for precision
             at every scale.
           </p>
@@ -127,7 +127,7 @@ export default function ServicesCarousel() {
                       alt={card.title}
                       fill
                       sizes="(min-width: 768px) 520px, 100vw"
-                      className="object-contain"
+                      className="origin-right scale-110 object-contain object-right"
                     />
                   </div>
                 </article>
