@@ -86,7 +86,13 @@ export default function HeroStat({ value, suffix = "", staticText, label }: Prop
 
   return (
     <div className="hero-stat-pop text-left">
-      <p className="text-5xl font-medium tabular-nums sm:text-7xl">
+      <p className="text-5xl font-medium tabular-nums sm:text-7xl"
+        style={{
+        letterSpacing: "0.1em",
+        fontVariantNumeric: "normal",
+        fontFeatureSettings: '"tnum" 0',
+      }}
+      >
         {staticText !== undefined ? (
           // invisible copy reserves the final width so the layout doesn't jump
           <span className="relative inline-block whitespace-nowrap">

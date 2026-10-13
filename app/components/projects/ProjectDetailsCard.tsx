@@ -15,6 +15,8 @@ const CARD_W = 300;
 const CARD_H = 470;
 const PEEK = 60; // space on the right for the stacked cards behind
 const MEDIA_H = 200;
+const ARROWS_H = 56; // mt-4 (16) + h-10 (40)
+const TOTAL_H = CARD_H + ARROWS_H;
 
 // Flag files in public/images/flags/
 const FLAGS: Record<string, string> = {
@@ -212,7 +214,7 @@ export default function ProjectDetailsCard({ project, position, onClose }: Props
 
   const style: React.CSSProperties = {
     width: totalW,
-    top: Math.max(position.y, CARD_H / 2 + 8),
+    top: Math.max(position.y, TOTAL_H / 2 + 8),
     transform: shown
       ? "translateY(-50%)"
       : `translateY(-50%) translateX(${wouldOverflowRight ? 16 : -16}px) scale(0.92)`,

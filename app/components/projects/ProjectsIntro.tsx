@@ -14,7 +14,7 @@ const vars = (v: Record<string, string>) => v as CSSProperties;
 
 function Stat({ value, label }: { value: string; label: ReactNode }) {
   return (
-    <div className="text-center">
+    <div className="text-left">
       <p
         className="pi-shine mx-auto w-fit bg-clip-text text-7xl font-medium leading-none text-transparent sm:text-8xl"
         style={vars({
@@ -25,7 +25,7 @@ function Stat({ value, label }: { value: string; label: ReactNode }) {
         {value}
       </p>
       <p
-        className="pi-fade mt-3 text-base leading-snug text-black"
+        className="pi-fade mt-3 text-2xl leading-snug text-black"
         style={vars({ "--pi-delay": `${T.statFade}ms` })}
       >
         {label}
@@ -97,7 +97,7 @@ export default function ProjectsIntro() {
           teams working on the ground.
         </p>
 
-        <div className="mt-10 flex flex-wrap items-start justify-center gap-x-20 gap-y-8">
+        <div className="mt-10 text-xl flex flex-wrap items-start justify-center gap-x-20 gap-y-8">
           <Stat
             value="26+"
             label={

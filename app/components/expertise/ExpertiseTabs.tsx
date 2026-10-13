@@ -269,7 +269,7 @@ export default function ExpertiseTabs() {
                 <li key={item.title} className="flex gap-4">
                   <ItemIcon name={item.icon} />
                   <div>
-                    <h4 className="text-xl font-normal text-black">
+                    <h4 className="text-xl font-medium text-black">
                       {item.title}
                     </h4>
                     <p className="mt-1 text-sm leading-snug text-zinc-700">

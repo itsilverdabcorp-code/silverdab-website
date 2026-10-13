@@ -88,7 +88,7 @@ function Digit({ char, dir }: { char: string; dir: 1 | -1 }) {
   const way = dir === 1 ? "up" : "down";
 
   return (
-    <span className="relative inline-block overflow-hidden">
+    <span className="relative inline-block overflow-hidden mr-[-0.08em]">
       <span
         key={`in-${s.n}`}
         className={`inline-block ${s.n > 0 ? `cu-in-${way}` : ""}`}

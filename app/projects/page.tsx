@@ -30,9 +30,9 @@ export default function ProjectsPage() {
     <>
       <ProjectsIntro />
 
-      <div className="relative w-full overflow-hidden bg-white px-6 pb-20">
+      <div className="relative w-full bg-white px-6 pb-20">
 
-        <div className="relative mt-10">
+        <div className="relative -mt-15">
           <ProjectGlobe
             onSelect={handleSelect}
             activeCode={selected?.countryCode ?? null}

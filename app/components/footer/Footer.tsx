@@ -19,6 +19,7 @@ const LINKS = [
 const OFFICES = [
   {
     country: "Philippines",
+    mapUrl: "https://maps.app.goo.gl/5KbFvPmtE3UUtE8J8",
     address: [
       "7F Unit 3, Hexagon",
       "Corporate Center, 1471",
@@ -29,14 +30,15 @@ const OFFICES = [
   },
   {
     country: "Singapore",
+    mapUrl: "https://maps.app.goo.gl/Mbi1K49oa6WbtzRd9",
     address: ["Unit 2008 1 Fullerton Rd,", "#02-01 One Fullerton,", "Singapore 049213"],
   },
 ];
 
+
 const SOCIALS = [
-  { label: "Facebook", href: "https://facebook.com", Icon: FaFacebookSquare },
-  { label: "LinkedIn", href: "https://linkedin.com", Icon: FaLinkedin },
-  { label: "Instagram", href: "https://instagram.com", Icon: FaInstagramSquare },
+  { label: "Facebook", href: "https://www.facebook.com/share/19ZDqAiqCT/", Icon: FaFacebookSquare },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/silverdab-corporation/", Icon: FaLinkedin },
 ];
 
 export default function Footer() {
@@ -55,7 +57,7 @@ export default function Footer() {
                 className="h-auto w-48"
               />
             </Link>
-            <p className="max-w-xs text-sm leading-snug text-zinc-100">
+            <p className="max-w-xs text-sm leading-snug tracking-wider text-zinc-100">
               Silverdab delivers BIM and Digital Engineering solutions for
               infrastructure projects across Asia-Pacific
             </p>
@@ -94,10 +96,10 @@ export default function Footer() {
               <li className="flex items-center gap-4">
                 <FaPhoneAlt className="shrink-0 text-lg text-white" />
                 <a
-                  href="tel:09099090909099"
+                  href="tel:+63253221900"
                   className="transition-colors hover:text-white"
                 >
-                  09099090909099
+                  +63 2 5322 1900
                 </a>
               </li>
             </ul>
@@ -110,13 +112,20 @@ export default function Footer() {
                 <FaMapMarkerAlt className="shrink-0 text-lg" />
                 {o.country}
               </h3>
-              <address className="mt-3 text-sm not-italic leading-snug text-zinc-300">
-                {o.address.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-              </address>
+              <a
+                href={o.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block transition-colors hover:text-white"
+              >
+                <address className="mt-3 text-sm not-italic leading-snug text-zinc-300 hover:text-white">
+                  {o.address.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </address>
+              </a>
             </div>
           ))}
         </div>
