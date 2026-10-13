@@ -1,11 +1,19 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_APP_PASSWORD,
+  },
+});
 
 export async function POST(req: Request) {
   try {
-    const { name, email, message, website } = await req.json();
+    const { firstName, lastName, email, phone, dialCode, subject, message, website } =
+      await req.json();
+    const name = `${firstName ?? ""} ${lastName ?? ""}`.trim();
 
     // Honeypot: bots fill this hidden field, humans never see it
     if (website) return NextResponse.json({ ok: true });
@@ -17,22 +25,30 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Invalid email" }, { status: 400 });
     }
 
-    const { error } = await resend.emails.send({
-      from: "Silverdab Website <no-reply@silverdab.com>",
-      to: ["amorales@silverdab.com", "sramos@silverdab.com", "hpatenio@silverdab.com"],
+    await transporter.sendMail({
+      from: `"Silverdab Website" <${process.env.GMAIL_USER}>`,
+      to: [
+        "itsilverdabcorp@gmail.com",
+        "amorales@silverdab.com",
+        "asualog@silverdab.com",
+        "hpatenio@silverdab.com",
+      ],
       replyTo: email, // hitting Reply goes to the visitor
-      subject: `New contact message from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
+      subject: subject?.trim() || `New contact message from ${name}`,
+      text:
+        `Name: ${name}\n` +
+        `Email: ${email}\n` +
+        `Phone: ${phone ? `${dialCode ?? ""} ${phone}`.trim() : "N/A"}\n\n` +
+        `${message}`,
     });
-
-    if (error) {
-      console.error("Resend error:", error);
-      return NextResponse.json({ error: "Failed to send" }, { status: 500 });
-    }
 
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("Contact route error:", err);
-    return NextResponse.json({ error: "Bad request" }, { status: 400 });
+    const isBadJson = err instanceof SyntaxError;
+    return NextResponse.json(
+      { error: isBadJson ? "Bad request" : "Server error" },
+      { status: isBadJson ? 400 : 500 }
+    );
   }
 }
