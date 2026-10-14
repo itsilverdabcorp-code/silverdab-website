@@ -96,12 +96,12 @@ export default function ContactInfo() {
       </div>
 
       <Reveal delay={0.7} className="mt-10 flex items-center gap-4">
-        <a href="#" aria-label="Facebook">
+        <a href="https://www.facebook.com/share/19ZDqAiqCT/" aria-label="Facebook">
           <svg viewBox="0 0 24 24" className="h-8 w-8" fill="currentColor">
             <path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4v-7h2.5l.5-3h-3V9.5c0-.9.4-1.5 1.6-1.5H18V5.2c-.4-.1-1.4-.2-2.5-.2-2.4 0-4 1.4-4 4.1V11H9v3h2.5v7H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" />
           </svg>
         </a>
-        <a href="#" aria-label="LinkedIn">
+        <a href="https://www.linkedin.com/company/silverdab-corporation/" aria-label="LinkedIn">
           <svg viewBox="0 0 24 24" className="h-8 w-8" fill="currentColor">
             <path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm1.3 7.5V18h2.4v-7.5H6.3ZM7.5 6.2a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8Zm3.2 4.3V18h2.4v-4c0-1.1.5-1.8 1.4-1.8s1.3.7 1.3 1.8V18h2.4v-4.6c0-2-1.1-3.1-2.7-3.1-1.1 0-1.8.6-2.1 1.1v-.9h-2.7Z" />
           </svg>
