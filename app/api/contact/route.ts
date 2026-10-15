@@ -27,11 +27,8 @@ export async function POST(req: Request) {
 
     await transporter.sendMail({
       from: `"Silverdab Website" <${process.env.GMAIL_USER}>`,
-      to: [
-        "itsilverdabcorp@gmail.com",
-        "amorales@silverdab.com",
-        "sramos@silverdab.com",
-      ],
+      to: "itsilverdabcorp@gmail.com",
+      cc: ["amorales@silverdab.com", "sramos@silverdab.com"],
       replyTo: email, // hitting Reply goes to the visitor
       subject: subject?.trim() || `New contact message from ${name}`,
       text:
