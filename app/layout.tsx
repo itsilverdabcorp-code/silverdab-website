@@ -64,7 +64,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Footer />
         <Script
           defer
-          src="https://analytics.silvergraph.ai/script.js"
+          src="https://engagement.silvergraph.ai/script.js"
           data-website-id="5a13a899-393d-4c5a-a0be-a442797627da"
           data-domains="silverdab.com,www.silverdab.com"
           strategy="afterInteractive"
