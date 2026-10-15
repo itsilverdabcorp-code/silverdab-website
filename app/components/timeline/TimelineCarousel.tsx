@@ -379,7 +379,7 @@ export default function TimelineCarousel() {
             </h2>
 
             <div
-              className="tl-year-intro mt-14 border-l-3 border-blue-600 pl-8"
+              className="tl-year-intro mt-14 min-h-[120px] border-l-3 border-blue-600 pl-8"
               aria-live="polite"
             >
               <div>
